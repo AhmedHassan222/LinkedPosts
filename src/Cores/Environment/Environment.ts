@@ -1,3 +1,3 @@
 export const environment = {
-    baseUrl:'https://linked-posts.routemisr.com/',
+    baseUrl:'https://linked-posts.routemisr.com',
 }
