@@ -16,28 +16,31 @@ export class SigninComponent {
   private readonly _UserService: UserService = inject(UserService);
   private readonly _ToastrService: ToastrService = inject(ToastrService);
   private readonly _Router: Router = inject(Router);
+  loading: boolean = false;
   // login form
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)])
   })
   login(): void {
+    this.loading = true;
     if (this.loginForm.valid) {
       this._UserService.signIn(this.loginForm.value).subscribe({
-        next:(res)=>{
-          console.log(res)
-          if(res?.message === "success"){
+        next: (res) => {
+          this.loading = false;
+          if (res?.message === "success") {
             this._Router.navigate(['/posts'])
             localStorage.setItem('userToken', res.token)
             this._UserService.saveUserData();
             this._ToastrService.success('Welecome back')
           }
         },
-        error:(err)=>{
+        error: (err) => {
           this._ToastrService.error(err.error.error)
         }
       })
     } else {
+      this.loading = false
       this.loginForm.markAllAsTouched();
     }
   }

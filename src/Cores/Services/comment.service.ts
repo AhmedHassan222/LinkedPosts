@@ -33,7 +33,7 @@ export class CommentService {
     })
   }
   // delete comment
-  deleteComment(commentId: string, model: object): Observable<any> {
+  deleteComment(commentId: string): Observable<any> {
     return this._HttpClient.delete(`${environment.baseUrl}/comments/${commentId}`, {
       headers: {
         token: localStorage.getItem('userToken') || ''

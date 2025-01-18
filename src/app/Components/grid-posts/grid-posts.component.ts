@@ -22,7 +22,10 @@ export class GridPostsComponent  {
   @Input({ required: true }) posts: IPost[] = [];
   @Input() isLoading: boolean = false;
   @Input() inProfile: boolean = false;
-
+  ngOnInit():void 
+  {
+    console.log(this.posts)
+  }
   loading:boolean = false;
   removePost(postId:string): void {
     this.loading = true;

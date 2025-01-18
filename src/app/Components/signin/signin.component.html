@@ -35,7 +35,7 @@
                             </small></p>}
                         }
                     </div>
-                    <button type="submit" class="btn btn-primary my-3 fs-6 fw-medium px-3 ">Sign in</button>
+                    <button type="submit" class="btn btn-primary my-3 fs-6 fw-medium px-3 ">@if (loading) {...Loading}@else {Sign in}</button>
                 </form>
                 <p class="fw-medium fs-6">Not registered? <a routerLink="/register" class="text-primary ms-1">Create
                         account</a></p>

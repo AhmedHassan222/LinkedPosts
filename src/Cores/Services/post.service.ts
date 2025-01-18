@@ -17,8 +17,8 @@ export class PostService {
     })
   }
   // get all posts
-  getAllPosts(limit: number = 10): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/posts?limit=${limit}`, {
+  getAllPosts(page:number=1): Observable<any> {
+    return this._HttpClient.get(`${environment.baseUrl}/posts?page=${page}`, {
       headers: {
         token: localStorage.getItem('userToken') || ''
       }
@@ -50,7 +50,7 @@ export class PostService {
     })
   }
   // delete post
-  DeletePost(postId: string, formData: FormData): Observable<any> {
+  DeletePost(postId: string): Observable<any> {
     return this._HttpClient.delete(`${environment.baseUrl}/posts/${postId}`, {
       headers: {
         token: localStorage.getItem('userToken') || ''
