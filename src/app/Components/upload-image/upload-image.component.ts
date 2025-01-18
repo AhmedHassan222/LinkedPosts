@@ -1,31 +1,30 @@
-import { PostService } from './../../../Cores/Services/post.service';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { UserService } from '../../../Cores/Services/user.service';
 
 @Component({
-  selector: 'app-create-post',
+  selector: 'app-upload-image',
   standalone: true,
-  imports: [FormsModule],
-  templateUrl: './create-post.component.html',
-  styleUrl: './create-post.component.scss'
+  imports: [],
+  templateUrl: './upload-image.component.html',
+  styleUrl: './upload-image.component.scss'
 })
-export class CreatePostComponent {
+export class UploadImageComponent {
 
   // injection 
-  private readonly _PostService: PostService = inject(PostService)
+  private readonly _UserService: UserService = inject(UserService)
   private readonly _ToastrService: ToastrService = inject(ToastrService)
   private readonly _Router: Router = inject(Router)
 
   // properties
   @Output() closeModal = new EventEmitter<void>();
   selectedFile: File | null = null;
-  content: string = '';
   loading: boolean = false;
   // functions
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
+    console.log(event)
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
     }
@@ -52,26 +51,23 @@ export class CreatePostComponent {
     }
   }
 
-  addPost(): void {
+  uploadImage(): void {
     this.loading = true;
     const formData = new FormData();
     if (!this.selectedFile) {
-      alert('Please select an image first.');
+      this._ToastrService.error('Please select an image first.');
       return;
     }
-    formData.append('image', this.selectedFile);
+    formData.append('photo', this.selectedFile);
 
-    if (this.content !== "") {
-      formData.append('body', this.content);
-    }
-    this._PostService.createPost(formData).subscribe({
+
+
+    this._UserService.uploadProfilePhoto(formData).subscribe({
       next: (res) => {
-        console.log(res)
         if (res.message = "success") {
           this.loading = false;
           this.closeModal.emit();
-          this._Router.navigate(['/profile'])
-          this._ToastrService.success("Your post added successfully")
+          this._ToastrService.success("Your photo was being changed")
         }
       },
       error: (err) => {

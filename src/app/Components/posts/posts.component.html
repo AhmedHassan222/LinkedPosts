@@ -1,55 +1,15 @@
-<div class="bg-light  py-3  px-3 px-md-0">
+<section class="bg-light  py-3  px-3 px-md-0">
     <div class="container">
-        <app-search />
-        @for (post of [1,2,3 , 4 ,5 ,6,7]; track $index) {
-        <div class="row mt-3 ">
+        <div class="row ">
             <div class="col-sm-12 col-md-8 col-lg-6 mx-auto py-3 px-3 px-md-4 bg-white shadow-sm">
-                <section>
-                    <div class="post mb-4">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle" style="width: 30px; height: 30px;"
-                                    src="../../../assets/profile.jfif" alt="">
-                                <div class="ms-3">
-                                    <p class="fw-medium my-0">Ahmed Hassan</p>
-                                    <p class="text-muted fw-medium my-0 fs-small">4 minutes ago</p>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-ellipsis"></i>
-                        </div>
-                        <p class="fw-medium fs-small my-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Recusandae sit debitis perferendis. Quibusdam, in.</p>
-                        <img src="./assets/testpost.jpg" class="w-100 rounded-1" alt="">
-                        <div class="d-flex justify-content-between pt-3">
-                            <p class="fs-small  text-end cr-pointer">Add Comment</p>
-                            <p class="fs-small  text-end cr-pointer">3 comments</p>
-                        </div>
-
-                        @if (loadComments) {
-                        <div class="comments">
-                            @for (comment of [1]; track $index) {
-                            <div class="comment my-2 px-4">
-                                <div class="d-flex align-items-center  ">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" style="width: 20px; height: 20px;"
-                                            src="../../../assets/profile.jfif" alt="">
-                                        <div class="ms-3">
-                                            <p class="fw-medium my-0">sayed mohamed</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-muted fw-medium pt-2 ms-3 fs-xsmall">feb 22, 2024</p>
-                                </div>
-                                <p class="fw-medium fs-xsmall my-1">Lorem ipsum dolor, sit amet consectetur adipisicing
-                                    elit.
-                                    Recusandae sit debitis perferendis. Quibusdam, in.</p>
-                            </div>
-                            }
-                        </div>
-                        }
-                    </div>
-                </section>
+                <button routerLink="/add-post" type="button"
+                    class="bg-transparent py-2 border-1 border border-black rounded-5 w-100 px-3 text-start">
+                    What's on your mind
+                </button>
             </div>
         </div>
-        }
+        <div class="scroll-container"    infiniteScroll  [infiniteScrollDistance]="2"  [infiniteScrollUpDistance]="1.5"   [infiniteScrollThrottle]="100"  (scrolled)="onScroll()"    (scrolledUp)="onScrollUp()">
+      <app-grid-posts [posts]="posts" [isLoading]="isLoading" /></div>
+
     </div>
-</div>
+</section>
