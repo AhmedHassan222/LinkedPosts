@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../Environment/Environment';
 import { isPlatformBrowser } from '@angular/common';
@@ -10,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class UserService {
   private readonly _HttpClent = inject(HttpClient);
-  private platform = inject(PLATFORM_ID);
+  private platform = inject(PLATFORM_ID)
 
   isLoggin: BehaviorSubject<any> = new BehaviorSubject(null);
   userData: BehaviorSubject<any> = new BehaviorSubject(null);

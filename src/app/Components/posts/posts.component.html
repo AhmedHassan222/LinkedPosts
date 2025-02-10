@@ -8,7 +8,7 @@
                 </button>
             </div>
         </div>
-        <div class="scroll-container"    infiniteScroll  [infiniteScrollDistance]="2"  [infiniteScrollUpDistance]="1.5"   [infiniteScrollThrottle]="100"  (scrolled)="onScroll()"    (scrolledUp)="onScrollUp()">
+        <div class="scroll-container"    infiniteScroll  [infiniteScrollDistance]="2"  [infiniteScrollUpDistance]="1.5"   [infiniteScrollThrottle]="100"  (scrolled)="onScroll()"   >
       <app-grid-posts [posts]="posts" [isLoading]="isLoading" /></div>
 
     </div>

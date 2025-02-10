@@ -31,26 +31,24 @@ export class PostsComponent implements OnInit {
       next: (res) => {
         this.posts = [...this.posts, ...res.posts];
         this.paggination = res.paginationInfo;
-        console.log(this.paggination)
       },
       error: (err) => {
         this._ToastrService.error(err?.error?.error)
 
-      },
+      }
     })
   }
   ngOnInit(): void {
     this.isLoading = true;
-    this.getAllPosts();
+    this.getAllPosts(1);
     setTimeout(() => {
       this.isLoading = false
-    }, 2500);
+    }, 3000);
   }
   onScroll() {
-    this.getAllPosts(this.paggination.currentPage + 1)
+    if(this.paggination.currentPage < this.paggination.numberOfPages)
+      this.getAllPosts(this.paggination.currentPage + 1)
   }
 
-  onScrollUp() {
-    this.getAllPosts(this.paggination.currentPage - 1)
-  }
+
 }
